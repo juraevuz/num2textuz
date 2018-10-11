@@ -21,9 +21,15 @@ function readClass(num) {
 		u = num[2];
 	}
 	
-	r[0] = cNames[+c]
-	r[1] = dNames[+d]
-	r[2] = uNames[+u];
+	if (c != "0" && d == "0" && u != "0") {
+		r[0] = cNames[+c];
+		r[1] = dNames[+d]+"-u";
+		r[2] = uNames[+u];
+	} else {
+		r[0] = cNames[+c];
+		r[1] = dNames[+d];
+		r[2] = uNames[+u];
+	}
 	
 	return r;
 }
@@ -83,6 +89,7 @@ function num2text(num){
 	
 	r = r.trim();
 	r = r.replace(/\s+/g, " ");
+	r = r.replace(/\s\-u/g, "-u");
 	console.log(num);
 	console.log(r);
 	return r;
