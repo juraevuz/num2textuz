@@ -1,7 +1,7 @@
 function readClass(num) {
 	uNames = ["","bir","ikki","uch","to‘rt","besh","olti","yetti","sakkiz","to‘qqiz"];
 	dNames = ["","o‘n","yigirma","o‘ttiz","qirq","ellik","oltmish","yetmish","sakson","to‘qson"];
-	cNames = ["","yuz","ikki yuz","uch yuz","to‘rt yuz","besh yuz","olti yuz","yetti yuz","sakkiz yuz","to‘qqiz yuz"];
+	cNames = ["","bir yuz","ikki yuz","uch yuz","to‘rt yuz","besh yuz","olti yuz","yetti yuz","sakkiz yuz","to‘qqiz yuz"];
 	r = [];
 	l = num.length;
 	
@@ -51,6 +51,9 @@ function removeZeros(num){
 function num2text(num){
 	num = removeZeros(num);
 	l = num.length;
+	if (l < 1) {
+		return "Siz kiritgan son faqat noldan iborat";
+	}
 	if (l < 4) {
 		b = [];
 		m = [];
@@ -84,16 +87,23 @@ function num2text(num){
 		r = b.join(" ")+" milliard "+m.join(" ")+" million "+t.join(" ")+" ming "+o.join(" ");
 	}
 	if (12 < l) {
-		r = "Siz kiritgan son o‘ta katta";
+		return "Siz kiritgan son o'ta katta";
 	}
 	
 	r = r.trim();
 	r = r.replace(/\s+/g, " ");
 	r = r.replace(/\s\-u/g, "-u");
-	console.log(num);
-	console.log(r);
+	r = r.replace("bir yuz ming", "yuz ming");
+	r = r.replace("bir yuz million", "yuz million");
+	r = r.replace("bir yuz milliard", "yuz milliard");
+	r = r.replace("million ming", "million");
+	r = r.replace("milliard million", "milliard");
+	
+	if (r == "bir ming") {
+		r = "ming";
+	}
+	if (r == "bir yuz") {
+		r = "yuz";
+	}
 	return r;
 }
-
-
-
