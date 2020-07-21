@@ -107,3 +107,8 @@ function num2text(num){
 	}
 	return r;
 }
+
+function doConvert(field, string) {
+	var output = num2text(string);
+	field.value = output;
+}
